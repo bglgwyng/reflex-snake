@@ -1,0 +1,50 @@
+name: reflex-snake
+
+ghc-options: -Wall -Wno-unused-matches
+language: GHC2021
+default-extensions:
+  - OverloadedStrings
+  - LambdaCase
+  - RecursiveDo
+  - DeriveGeneric
+  - BlockArguments
+  - TypeFamilies
+  - FunctionalDependencies
+  - RecordWildCards
+  - ApplicativeDo
+  - MultiWayIf
+dependencies:
+  - base
+  - reflex
+  - reflex-vty
+  - text
+  - containers
+  - vty
+  - time
+  - patch
+  - these
+  - random
+  - hspec
+  - hspec-discover
+
+# Add the library section
+library:
+  source-dirs: lib
+
+executables:
+  app:
+    source-dirs: app
+    main: Main.hs
+    ghc-options: -threaded  # Added this line
+    dependencies:
+      - reflex-snake  # Add this to ensure the executable can use the library
+
+tests:
+  spec:
+    main: Spec.hs
+    source-dirs: test
+    dependencies:
+      - reflex-snake
+      - hspec
+      - hspec-discover  # Add this line
+    build-tools: hspec-discover  # Add this line
